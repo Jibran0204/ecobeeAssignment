@@ -1,10 +1,37 @@
+# imported requests because it is a library that allows me to send HTTP requests
 import requests
+# imported random because it is a library that allows me to generate random numbers.
+# this will be used for the first task
+import random
 
-# 1. import the requests library
-url = "https://jsonplaceholder.typicode.com/posts"
-# 2. define the url to be used 
-params = {"userId": 1}
-# 3. define the parameters to be used
-response = requests.get(url, params=params)
-# 4. make the request
-print(response.json()[0].get("body"))
+# url of the API
+url = "https://jsonplaceholder.typicode.com"
+
+
+# getting random posts:
+def random_posts(NumPosts=10):
+    # use the base url and the /posts endpoint to get all posts
+    response = requests.get(url + "/posts")
+    # convert the response to json
+    # the response is a string and we want to be able to access the data as a dictionary
+    post = response.json()
+    # use the random library to generate random numbers
+    random_post = random.sample(post, NumPosts)
+    # return
+    return random_post
+
+def main():
+    # call the random posts functions this will allow me to
+    posts = random_posts()
+
+    i = 0
+    while i < len(posts):
+        post = posts[i];
+        print(f"{i+1}. {post.get('title')}")
+        i += 1
+    
+    # test to see if the loop finishes
+    print("goodbye");
+
+if __name__ == "__main__":
+    main()
