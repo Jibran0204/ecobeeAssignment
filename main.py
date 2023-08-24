@@ -20,6 +20,15 @@ def random_posts(NumPosts):
     # return
     return random_post
 
+# function to select a post
+def select_post(posts, option):
+    # convert the option to an integer also subtract 1 since index is 1-9
+    option = int(option) - 1
+    optionPost = posts[option]
+    # print the selected option
+    print(optionPost.get("title"))
+
+
 def main():
     # call the random posts functions this will allow me to
     num = 10
@@ -27,10 +36,14 @@ def main():
 
     i = 0
     while i < len(posts):
-        post = posts[i];
+        post = posts[i]
         print(f"{i+1}. {post.get('title')}")
         i += 1
     
+    postNum = input("select a number between 1-10: ")
+    select_post(posts, postNum)
+
+
 
 if __name__ == "__main__":
     main()
