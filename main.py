@@ -9,7 +9,7 @@ url = "https://jsonplaceholder.typicode.com"
 
 
 # getting random posts:
-def random_posts(NumPosts=10):
+def random_posts(NumPosts):
     # use the base url and the /posts endpoint to get all posts
     response = requests.get(url + "/posts")
     # convert the response to json
@@ -22,7 +22,8 @@ def random_posts(NumPosts=10):
 
 def main():
     # call the random posts functions this will allow me to
-    posts = random_posts()
+    num = 10
+    posts = random_posts(num)
 
     i = 0
     while i < len(posts):
@@ -30,8 +31,6 @@ def main():
         print(f"{i+1}. {post.get('title')}")
         i += 1
     
-    # test to see if the loop finishes
-    print("goodbye");
 
 if __name__ == "__main__":
     main()
