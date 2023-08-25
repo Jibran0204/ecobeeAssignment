@@ -72,6 +72,16 @@ def comment(comment, commentList):
     print("\n")
     return commentList
 
+def list_comments(comments):
+    for i in comments:
+        print("Comment Details:")
+        print("Name: " + i['name'])
+        print("Email: " + i['email'])
+        print("Body: " + i['body'])
+        # print("postID: " + str(i['postId']))
+        # print("commentID: " + str(i['id']))
+        print("\n")
+
 
 
 def main():
@@ -106,15 +116,8 @@ def main():
     if commentDecision == "y":
         # uuse the get_comments function to get a list of comments
         comments = get_comments(posts[int(postNum) - 1])
-        # loop through the comments and print them
-        for i in comments:
-            print("Comment Details:")
-            print("Name: " + i['name'])
-            print("Email: " + i['email'])
-            print("Body: " + i['body'])
-            # print("postID: " + str(i['postId']))
-            # print("commentID: " + str(i['id']))
-            print("\n")
+        list_comments(comments)
+
     else:
         # exit the program
         print("Thanks for using the program :)")
@@ -144,15 +147,7 @@ def main():
             "body": body
         }
         comment(userComment, comments)
-        # print all the comments
-        for i in comments:
-            print("\nComment Details:")
-            print("Name: " + i['name'])
-            print("Email: " + i['email'])
-            print("Body: " + i['body'])
-            # print("postID: " + str(i['postId']))
-            # print("commentID: " + str(i['id']))
-            print("\n")
+        list_comments(comments)
     else:
         # exit the program
         print("Thanks for using the program :)")
