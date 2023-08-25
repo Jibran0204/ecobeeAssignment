@@ -24,9 +24,20 @@ def random_posts(NumPosts):
 def select_post(posts, option):
     # convert the option to an integer also subtract 1 since index is 1-9
     option = int(option) - 1
+    
+    # error handling in case select post is run below
+    if option < 0 or option > 11:
+        return
+    
     optionPost = posts[option]
     # print the selected option
-    print(optionPost.get("title"))
+    print("\nPost Details:")
+    print("Title: " + optionPost['title'])
+    print("Body: " + optionPost['body'])
+
+    print("\n")
+    return optionPost
+
 
 
 def main():
@@ -40,7 +51,14 @@ def main():
         print(f"{i+1}. {post.get('title')}")
         i += 1
     
+    # ask the user to select a post
     postNum = input("select a number between 1-10: ")
+    # error handling
+    while(int(postNum) > 10 or int(postNum) < 1):
+        print("Invalid number")
+        postNum = input("select a number between 1-10: ")
+        
+    # call the select post function
     select_post(posts, postNum)
 
 
