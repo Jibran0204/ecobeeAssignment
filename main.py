@@ -60,6 +60,18 @@ def get_comments(post):
             post_comments.append(i)
     return post_comments
 
+def comment(comment, commentList):
+
+    # add the comment to the list of comments
+    commentList.append(comment)
+    # print the comment
+    print("Your comment!!:")
+    print("Name: " + comment['name'])
+    print("Email: " + comment['email'])
+    print("Body: " + comment['body'])
+    print("\n")
+    return commentList
+
 
 
 def main():
@@ -96,7 +108,7 @@ def main():
         comments = get_comments(posts[int(postNum) - 1])
         # loop through the comments and print them
         for i in comments:
-            print("\nComment Details:")
+            print("Comment Details:")
             print("Name: " + i['name'])
             print("Email: " + i['email'])
             print("Body: " + i['body'])
@@ -108,6 +120,43 @@ def main():
         print("Thanks for using the program :)")
         exit()
 
+    # create a prompt to ask the user if they want to comment
+    addCommentDecision = input("Do you want to comment? (y/n): ")
+    # error handling
+    while(addCommentDecision != "y" and addCommentDecision != "n"):
+        print("Invalid input")
+        addCommentDecision = input("Do you want to comment? (y/n): ")
+    
+    # if the user wants to comment
+    if addCommentDecision == "y":
+        # create a prompt to ask the user for their name
+        name = input("Enter your name: ")
+        # create a prompt to ask the user for their email
+        email = input("Enter your email: ")
+        # create a prompt to ask the user for their comment
+        body = input("Enter your comment: ")
+        # create a dictionary to store the comment
+        userComment = {
+            "postId": int(postNum),
+            "id": len(comments) + 1,
+            "name": name,
+            "email": email,
+            "body": body
+        }
+        comment(userComment, comments)
+        # print all the comments
+        for i in comments:
+            print("\nComment Details:")
+            print("Name: " + i['name'])
+            print("Email: " + i['email'])
+            print("Body: " + i['body'])
+            # print("postID: " + str(i['postId']))
+            # print("commentID: " + str(i['id']))
+            print("\n")
+    else:
+        # exit the program
+        print("Thanks for using the program :)")
+        exit()
 
 
 if __name__ == "__main__":
