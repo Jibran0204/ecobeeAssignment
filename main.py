@@ -34,9 +34,29 @@ def select_post(posts, option):
     print("\nPost Details:")
     print("Title: " + optionPost['title'])
     print("Body: " + optionPost['body'])
+    # print("id: " + str(optionPost['id']))
+    # print("userId: " + str(optionPost['userId']))
 
     print("\n")
     return optionPost
+
+
+def get_comments(post):
+    # get the post id
+    post_id = post['id']
+    response = requests.get(url + "/comments")
+
+    # convert the response to json
+    comments = response.json()
+    # create an empty list to store the comments
+    post_comments = []
+    # loop through all comments
+    for i in comments:
+        # if the comment belongs to the post
+        if i['postId'] == post_id:
+            # add the comment to the list
+            post_comments.append(i)
+    return post_comments
 
 
 
@@ -60,6 +80,31 @@ def main():
         
     # call the select post function
     select_post(posts, postNum)
+
+    # using the same logic as above to get the comments
+    commentDecision = input("Do you want to see the comments? (y/n): ")
+    # error handling
+    while(commentDecision != "y" and commentDecision != "n"):
+        print("Invalid input")
+        commentDecision = input("Do you want to see the comments? (y/n): ")
+
+    # if the user wants to see the comments
+    if commentDecision == "y":
+        # uuse the get_comments function to get a list of comments
+        comments = get_comments(posts[int(postNum) - 1])
+        # loop through the comments and print them
+        for i in comments:
+            print("\nComment Details:")
+            print("Name: " + i['name'])
+            print("Email: " + i['email'])
+            print("Body: " + i['body'])
+            # print("postID: " + str(i['postId']))
+            # print("commentID: " + str(i['id']))
+            print("\n")
+    else:
+        # exit the program
+        print("Thanks for using the program :)")
+        exit()
 
 
 
