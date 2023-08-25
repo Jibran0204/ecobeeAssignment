@@ -78,10 +78,25 @@ def list_comments(comments):
         print("Name: " + i['name'])
         print("Email: " + i['email'])
         print("Body: " + i['body'])
-        # print("postID: " + str(i['postId']))
-        # print("commentID: " + str(i['id']))
         print("\n")
 
+def view_similar_posts(post):
+    # get the user id
+    user_id = post['userId']
+    response = requests.get(url + "/posts")
+
+    # convert the response to json
+    posts = response.json()
+    
+    # create an empty list to store the posts
+    user_posts = []
+    # loop through all posts
+    for i in posts:
+        # if the post belongs to the user
+        if i['userId'] == user_id:
+            # add the post to the list
+            user_posts.append(i)
+    return user_posts
 
 
 def main():
@@ -153,6 +168,25 @@ def main():
         print("Thanks for using the program :)")
         exit()
 
+    # create a prompt to ask the user if they want to view similar posts
+    viewSimilarPostsDecision = input("Do you want to view similar posts? (y/n): ")
+    # error handling
+    while(viewSimilarPostsDecision != "y" and viewSimilarPostsDecision != "n"):
+        print("Invalid input")
+        viewSimilarPostsDecision = input("Do you want to view similar posts? (y/n): ")
+
+    # if the user wants to view similar posts
+    if viewSimilarPostsDecision == "y":
+        # use the view_similar_posts function to get a list of similar posts
+        similarPosts = view_similar_posts(posts[int(postNum) - 1])
+        # print the similar posts
+        print("Similar Posts:")
+        for i in similarPosts:
+            print(i['title'])
+    else:
+        # exit the program
+        print("Thanks for using the program :)")
+        exit()
 
 if __name__ == "__main__":
     main()
