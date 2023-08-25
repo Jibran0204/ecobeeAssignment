@@ -42,12 +42,14 @@ def select_post(posts, option):
 
 
 def get_comments(post):
+
     # get the post id
     post_id = post['id']
     response = requests.get(url + "/comments")
 
     # convert the response to json
     comments = response.json()
+    
     # create an empty list to store the comments
     post_comments = []
     # loop through all comments
