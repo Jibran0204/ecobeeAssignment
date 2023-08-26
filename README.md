@@ -33,7 +33,7 @@ in the terminal, run the following command:\
 
 ## Running the tests
 in the terminal, in the same directory, run the following command:\
-    python -m unittest tests.testing\
+    python -m unittest tests.testing
 
 I used unittest to test my code. I tested the following:\
     - radomly generated posts\
