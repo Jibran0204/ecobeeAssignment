@@ -18,21 +18,21 @@ The API simulates blog-type functionality, supporting making and fetching ‘pos
 You will have access to my github repository when I send this to you\
 Follow the steps below in order to have everything you need to run this program
 
-1 - open a terminal and cd into documents\
-2 - make a directory using my name (mkdir jibran)\
-3 - pull the repository into the directory using the following command:\
-    git pull git@github.com:Jibran0204/ecobeeAssignment.git\
+1 - Open a terminal and cd into documents\
+2 - Make a directory using my name (mkdir jibran)\
+3 - Clone the repository into the directory using the following command:\
+    git clone git@github.com:Jibran0204/ecobeeAssignment.git\
 4 - cd into the file ecobeeAssignment
 
 You now have everything you need to run the program!!
 
 ## Running the program
-in the terminal, run the following command:\
+In the terminal, run the following command:\
     python3 main.py\
-    you can then follow the program instructions!
+    You can then follow the program instructions!
 
 ## Running the tests
-in the terminal, in the same directory, run the following command:\
+In the terminal, in the same directory, run the following command:\
     python -m unittest tests.testing
 
 I used unittest to test my code. I tested the following:\

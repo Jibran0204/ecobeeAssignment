@@ -4,25 +4,31 @@ from main import random_posts, select_post, get_comments, comment
 class TestRandomPosts(unittest.TestCase):
 
     # test that the number of posts returned is equal to the number of posts requested
+    # the result of this test should be a pass
     def test_random_posts(self):
         num_posts = 10
         posts = random_posts(num_posts)
         self.assertEqual(len(posts), num_posts)
 
     # test random posts with no number
+    # the result of this test should be an error (TypeError)
     def test_random_posts_no_number(self):
         posts = random_posts()
         self.assertEqual(len(posts), 10)
 
     # test the random posts with negative number
+    # the result of this test should be an error (valueError)
     def test_random_posts_negative_number(self):
         posts = random_posts(-1)
         self.assertEqual(len(posts), 10)
 
+    # test the random posts with zero
+    # the reult of this test should be a pass
     def test_zero_posts(self):
         posts = random_posts(0)
         self.assertEqual(len(posts), 0)
-
+    
+    # test the random posts with a number greater than 10
     def test_random_posts_out_of_range(self):
         posts = random_posts(11)
         self.assertEqual(len(posts), 11)
@@ -42,23 +48,30 @@ class TestSelectedPosts(unittest.TestCase):
     {'id': 9, 'title': 'Title 10', 'body': 'Body 10', 'userId': 5}
 ]
 
-
+    # test that the selected post is equal to the post selected
+    # the result should be a pass
     def test_selected_post(self):
         option = 1
         post = select_post(self.mock_posts, option)
         self.assertEqual(post, self.mock_posts[0])
         
+    # test what happens when a negative number is passed
+    # the result should be a fail (AssertionError)
     def test_selected_post_negative_number(self):
         option = -1
         post = select_post(self.mock_posts, option)
         self.assertEqual(post, self.mock_posts[0])
 
+    # test what happens when zero is passed
+    # the result should be a fail (AssertionError)
     def test_selected_post_zero(self):
         option = 0
         post = select_post(self.mock_posts, option)
         self.assertEqual(post, self.mock_posts[0])
 
-    def test_select_post_out_of_range(self):
+    # test what happens when a number greater than 10 is passed
+    # the result should be an error (IndexError)
+    def test_selected_post_out_of_range(self):
         option = 11
         post = select_post(self.mock_posts, option)
         self.assertEqual(post, self.mock_posts[0])
@@ -79,11 +92,14 @@ class TestPostComments(unittest.TestCase):
 ]
 
     # test that the number of comments are equal to the number of comments for the post
+    # the result should be a pass
     def test_get_comments(self):
         post = self.mock_posts[1]
         comments = get_comments(post)
         self.assertEqual(len(comments), 5)
-            
+
+    # test what happens if the post is empty
+    # the result should be a fail (AssertionError)
     def test_get_comments_no_post(self):
         post = {}
         comments = get_comments(post)
@@ -108,16 +124,22 @@ class testAddComments(unittest.TestCase):
     {'id': 9, 'title': 'Title 10', 'body': 'Body 10', 'userId': 5}
 ]
 
+    # test that adding a comment works
+    # the result should be a pass
     def test_comment(self):
         testComment = {'name': 'name', 'email': 'email', 'body': 'body'}
         comments = comment(testComment, [])
         self.assertEqual(len(comments), 1)
 
+    # test what happens if the comment is empty
+    # the result should be an error (KeyError)
     def test_comment_no_comment(self):
         testComment = {}
         comments = comment(testComment, [])
         self.assertEqual(len(comments), 0)
 
+    # test what happens if the list is empty
+    # the result should be an error (attributeError)
     def test_comment_no_list(self):
         testComment = {'name': 'name', 'email': 'email', 'body': 'body'}
         comments = comment(testComment, None)
